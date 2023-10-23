@@ -1,0 +1,2366 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+*
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+button a {
+    text-decoration: none;
+    color: inherit;  /* to ensure the link color matches the button text color */
+}
+
+button a:hover {
+    text-decoration: underline; /* or any other effect you want on hover */
+}
+
+#timer {
+    font-size: 3em;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10; /* Keep the timer above other elements */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1500;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column; /* this makes it a flex container */
+    align-items: center;    /* center the items horizontally */
+    gap: 10px;              /* apply the gap */
+
+    color: white;
+    background-color: #19181A;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 15px;    /* rounding the corners */
+    width: 300px;
+    z-index: 1501;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;    /* added gap for better separation from content */
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Style for the buttons */
+button1 {
+    background-image: linear-gradient(120deg, #19181A 0%, #5b5d5e 100%);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s;
+}
+
+button1:hover {
+    transform: scale(1.05);
+}
+
+button1:active {
+    transform: scale(0.95);
+}
+
+.music-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.music-controls button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 24px; /* adjust as per need */
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.music-controls button:hover {
+    color: #f0f0f0; /* Lighten the icon color on hover */
+}
+
+
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* or any other color you prefer */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3; /* darken the color on hover */
+    box-shadow: 0 0 15px 5px rgba(0,123,255,0.7); /* Blue glow effect */
+}
+
+.spacer {
+    width: 100%;
+    clear: both;
+}
+
+.spacer--small {
+    height: 25px;
+}
+
+.spacer--medium {
+    height: 50px;
+}
+
+.spacer--large {
+    height: 100px;
+}
+
+
+.image-container {
+    position: relative;
+    width: max-content; /* Adapts to the intrinsic width of the content (your image in this case) */
+    height: max-content; 
+}
+.flag {
+    display: inline-block;
+    width: 20px;
+    height: 15px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.flag-en {
+    background: url('/flag/en.png') no-repeat center;
+    background-size: cover;
+}
+
+.flag-fr {
+    background: url('flag/fr.png') no-repeat center;
+    background-size: cover;
+}
+
+.flag-de {
+    background: url('flag/de.png') no-repeat center;
+    background-size: cover;
+}
+
+.flag-zh-ch {
+    background: url('flag/cn.png') no-repeat center;
+    background-size: cover;
+}
+
+.flag-zh-tw {
+    background: url('flag/tw.png') no-repeat center;
+    background-size: cover;
+}
+
+/* Styling for the translation button */
+.translate-btn {
+    position: relative;
+    display: inline-block;
+    padding: 10px 15px;
+    background: #19181A;
+    color: #ffffff;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.translate-btn:hover {
+    background-color: #19181A;
+}
+
+/* Styling for the languages overlay */
+.languages-overlay {
+    display: none; 
+    position: absolute;
+    top: 100%; /* Position it right below the button */
+    left: 0;
+    background-color: #000000;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it appears on top of other elements */
+    width: 200px; /* Optional: Adjust based on your requirements */
+}
+
+.translate-btn:hover .languages-overlay {
+    display: block;
+}
+
+.languages-overlay a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+.languages-overlay a:hover {
+    background-color: #f5f5f5;
+}
+
+/* Mobile */
+.translate-btn-mobile {
+    position: relative;
+    display: none;
+    padding: 10px 15px;
+    background: #19181A;
+    color: #ffffff;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.translate-btn-mobile:hover {
+    background-color: #19181A;
+}
+.translate-btn-mobile:hover .languages-overlay {
+    display: block;
+}
+
+.translate-btn-mobile{
+    padding-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .translate-btn-mobile {
+        display: inline-block;
+        margin-right: 10px;
+        margin-left: auto;
+    }
+
+
+}
+
+
+
+body
+{
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(#19181A,#19181A);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* By default, the desktop navigation is displayed */
+.nav-desk {
+    display: flex;
+    justify-content: center; /* Center contents horizontally */
+    align-items: center; /* Center contents vertically */
+    width: 100%; /* Take up the full width of its parent */
+}
+
+.nav-desk ul {
+    display: flex;
+    gap: 20px; /* Spacing between items */
+}
+
+.nav-desk li {
+    list-style-type: none;
+}
+
+.nav-desk a {
+    text-decoration: none;
+    color: #FFF;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+.nav-desk a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hide the desktop navigation for mobile devices and show the menu toggle */
+@media only screen and (max-width: 768px) {
+    .nav-desk {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+}
+
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+     /* margin-left: auto; This pushes the burger menu to the right */
+}
+
+.menu-toggle .bar {
+    background-color: #fff; /* White color for the burger menu */
+    height: 3px;
+    width: 25px;
+    margin: 3px;
+    transition: 0.3s; /* Smooth transition for animations */
+}
+
+
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-list-wrapper.active {
+        max-height: 200px; /* Adjust this value based on the number of menu items */
+    }
+}
+.nav-overlay.active {
+    display: flex;
+}
+
+/* Navigation Overlay Styles */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black */
+    z-index: 10001; 
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-overlay ul {
+    list-style-type: none;
+}
+
+.nav-overlay ul li {
+    margin: 20px 0;
+}
+
+.nav-overlay ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 2em;
+    transition: color 0.3s;
+}
+
+.nav-overlay ul li a:hover {
+    color: #ff4500; /* Change to your preferred hover color */
+}
+
+.sticky-header {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    top: 0;
+    top: 0;
+    left: 0;
+    right: 0; /* added to ensure the navbar spans the full width */
+    padding: 20px 50px; /* reduced side padding for a more spacious look */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4); /* light transparent black for contrast */
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
+    z-index: 10002;
+}
+
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; /* added to ensure the navbar spans the full width */
+    padding: 20px 50px; /* reduced side padding for a more spacious look */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4); /* light transparent black for contrast */
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
+    z-index: 10002;
+    transition: all 0.3s ease-in-out; /* for smooth effect when styles change */
+}
+
+header:hover {
+    background: rgba(0, 0, 0, 0.4); /* darken background on hover */
+}
+
+header .logo {
+    display: none; /* This hides the logo */
+    color: #FFF; 
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* reduce spacing for a tighter appearance */
+}
+
+header .logo_article {
+    
+    color: #FFF; 
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* reduce spacing for a tighter appearance */
+}
+
+
+
+header ul {
+    display: flex;
+    align-items: center;
+}
+
+header ul li {
+    list-style: none;
+    margin-left: 15px; /* reduced spacing for a more clustered appearance */
+}
+
+header ul li a {
+    text-decoration: none;
+    padding: 8px 20px; 
+    color: #FFF;
+    border-radius: 15px;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out; /* smooth hover transitions */
+}
+
+header ul li a:hover, header ul li a.active {
+    background: #551010;
+    color: #FFF;
+}
+
+
+section
+{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+section::before
+{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(0deg, #19181A 0%, rgba(0, 0, 0, 0.00) 100%);
+    z-index: 1000;
+}
+section img 
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+section img#moon
+{
+    mix-blend-mode: screen;
+}
+section img#mountains_front
+{
+    z-index: 10;
+}
+#text
+
+
+
+{
+    position: absolute;
+    color: #fff;
+    right: -350px;
+    white-space: nowrap;
+    font-size: 7.5vw;
+    z-index: 9;
+    
+}
+
+.bouncing-arrow-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    cursor: pointer;
+    left: 50%;
+    bottom: 10%;  /* Initial position from the bottom */
+    transform: translateX(-50%); /* for horizontal centering */
+    width: 90px;
+    height: 90px;
+    z-index: 9999;
+}
+
+
+.bouncing-arrow {
+    width: 0;
+    height: 0;
+    border-left: 13.5px solid transparent;
+    border-right: 13.5px solid transparent;
+    border-top: 13.5px solid #ffffff;
+    animation: bounce 1s infinite;
+    position: absolute;
+    bottom: 22.5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bouncing-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: rgba(230, 230, 250, 0.7);
+    border: 2px solid #6c6a6c;
+    animation: pulse 1.2s infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+    }
+    40% {
+        transform: translateY(-15px) translateX(-50%);
+    }
+    60% {
+        transform: translateY(-7.5px) translateX(-50%);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.7;
+    }
+    70% {
+        transform: scale(1.05);
+        opacity: 0.85;
+    }
+    100% {
+        transform: scale(0.95);
+        opacity: 0.7;
+    }
+}
+
+/* Media query for mobile devices with a maximum width of 767px */
+@media (max-width: 767px) {
+    .bouncing-arrow-container {
+        top: 70%;
+    }
+}
+
+/* Media query for tablet devices with a minimum width of 768px and a maximum width of 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .bouncing-arrow-container {
+        top: 80%; /* Adjust the top value for tablets */
+    }
+}
+
+@media (min-width: 1024px) {
+    .bouncing-arrow-container {
+        top: 80%; /* Adjust the top value for desktop */
+    }
+}
+
+
+
+#btn, #btn2,#btn2b {
+    text-decoration: none;
+    padding: 8px 30px;
+    display: inline-block;
+    border-radius: 40px;
+    font-size: 1.5em;
+    transform: translateY(100px);
+    transition: all 0.5s ease;  /* Smooth transition for hover effects */
+    
+}
+
+#btn {
+    background-color: #19181A;   /* Darker background for DexTools */
+    color: #fff;   /* White text */
+    margin-right: 10px;  /* Space between the buttons */
+}
+
+#btn2 {
+    background-color: #fff;  /* White background for Launch app */
+    border: 2px solid #19181A;  /* Border color */
+    color: #000000;  /* Text color */
+}
+
+#btn:hover {
+    background-color: #616163;   /* Slightly lighter on hover for DexTools */
+    color: #fff;   /* White text */
+}
+
+#btn2:hover {
+    background-color: #f7f7f7;   /* Slightly darker white on hover for Launch app */
+    border-color: #3c2166;  /* Darker border on hover */
+    color: #2b1055;  /* Text color */
+}
+
+
+#btn, #btn2, #btn3 {
+    z-index: 20;  /* This z-index is higher, ensuring the buttons are above the mountain image */
+    position: relative; /* Ensures z-index works properly */
+
+}
+
+.parallax-section #btn, .parallax-section #btn2 {
+    text-decoration: none;
+    padding: 8px 30px;
+    display: inline-block;
+    border-radius: 40px;
+    font-size: 1.5em;
+    transform: translateY(100px);
+    transition: all 0.5s ease;  /* Smooth transition for hover effects */
+    
+}
+
+
+
+.coming-soon {
+    position: absolute;  /* overlay will be positioned on top of the charity section */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);  /* semi-transparent white overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;  /* ensure the overlay is above other content in the charity section */
+    backdrop-filter: blur(5px);  /* apply a blur to the background of this overlay */
+}
+
+.coming-soon p {
+    font-size: 2em;  /* increase the font size for visibility */
+    font-weight: bold;
+    color: #2b1055;  /* same color as your buttons for consistency */
+}
+
+
+#logo1 {
+    transition: all 0.3s ease;  /* Smooth transition for hover effects */
+    cursor: pointer;  /* Change cursor to hand on hover for better UX */
+    animation: float 3s infinite; /* This applies the floating animation to the logo */
+}
+
+#timer{
+    transition: all 0.3s ease;  /* Smooth transition for hover effects */
+    cursor: pointer;  /* Change cursor to hand on hover for better UX */
+    animation: float 3s infinite; /* This applies the floating animation to the logo */
+    text-shadow: 
+        1px 0px 0px #000,   
+        -1px 0px 0px #000,  
+        0px 1px 0px #000,   
+        0px -1px 0px #000,  
+        1px 1px 0px #000,  
+        -1px -1px 0px #000,
+        1px -1px 0px #000, 
+        -1px 1px 0px #000;  
+        width: 1000;
+}
+
+
+
+/* As seen */
+
+.as-seen-in {
+    
+    text-align: center;
+    background-color: #19181A;
+    padding: 20px;
+    border-radius: 20px;
+    padding:150px;
+    padding: top 5px;
+    padding-bottom: 10px;
+}
+@media (max-width: 768px) {
+    .as-seen-in {
+        padding: 40px;
+    }
+
+}
+.as-seen-in h2 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: left;
+}
+
+.as-seen-in h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: left;
+}
+
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+
+    
+.logos {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+}
+
+.logos img {
+    margin: 0 20px;
+    vertical-align: middle; /* Aligns the images with the middle of the line */
+    width: 150px;
+    height: 50px;
+    object-fit: contain; /* This ensures the logo maintains its aspect ratio */
+}
+
+
+@keyframes marquee {
+    0%   { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
+
+:root {
+    --timing: 400ms;
+    --rotation: 20deg;
+  }
+  
+  
+  img {
+    max-width: 100%;
+  }
+  
+  .slide-img {
+    width: 300px;
+    aspect-ratio: 9 / 16;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: rotate var(--timing) ease;
+  }
+  
+  .slide-img:hover {
+    rotate: x var(--rotation);
+  }
+  
+  .slide-img::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    background-image: radial-gradient(circle, transparent 150px, black);
+    opacity: 0;
+    transition: opacity var(--timing);
+  }
+  
+  .slide-img:hover::before {
+    opacity: 1;
+  }
+  
+  .slide-img::after {
+    content: "";
+    position: absolute;
+    inset: 80% 0.5rem 0.5rem;
+    translate: 0;
+    transform: translateZ(-100px);
+    background: black;
+    filter: blur(1rem);
+    z-index: 1;
+    transition: rotate var(--timing), translate var(--timing);
+  }
+  
+  .slide-img:hover::after {
+    rotate: x calc(var(--rotation) * -1);
+    translate: 0 60px;
+  }
+  
+  .bg-image {
+    position: absolute;
+    z-index: 10;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .slide-logo,
+  .front-image {
+    position: absolute;
+    content: "Click me";
+  }
+  
+  .slide-logo {
+    z-index: 1000;
+    filter: invert(1);
+    width: 65%;
+    margin-inline: auto;
+    inset: auto 0 2rem;
+    transform: translateY(0rem) translateZ(20px);
+    transition: var(--timing);
+  }
+  
+  .slide-img:hover .logo {
+    transform: translateY(-2rem) translateZ(20px);
+    rotate: x calc(var(--rotation) * -1);
+  }
+  
+  .front-image {
+    scale: 1.125;
+    transform-origin: bottom;
+    opacity: 0;
+    z-index: 100;
+    transition: var(--timing);
+  }
+  
+  .slide-img:hover .front-image {
+    opacity: 1;
+    transform: translateY(-2rem) translateZ(-10px);
+    rotate: x calc(var(--rotation) * -1);
+  }
+  
+
+.utilities-slider {
+    display: flex;
+    flex-direction: column;  /* stacks the children vertically */
+    padding: 150px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.utility-row {
+    display: flex;   /* lines up the boxes in a row */
+    overflow-x: auto;  /* makes it horizontally scrollable */
+}
+
+.utility-box {
+    flex: 0 0 auto;  /* ensures that boxes don't stretch or shrink */
+    margin-right: 10px;  /* gap between utilities */
+}
+
+.utility-frame {
+    border-radius: 20px; /* provides the curved frame */
+    padding: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    min-width: 300px; /* adjust width as needed */
+
+}
+
+.utility-content {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    padding: 20px;
+    height: 600px;
+    display: flex;  /* Turn on Flexbox */
+    flex-direction: column;  /* Stack children vertically */
+    justify-content: center;  /* Center children horizontally */
+    align-items: center;  /* Center children vertically */
+    color: #fff; 
+    position: relative;
+}
+
+.utility-content:hover {
+    filter: brightness(1.3) saturate(1.2);
+    transition: filter 0.3s; /* Smooth transition for hover effects */
+}
+
+
+.utility-content:hover::before {
+    opacity: 1; /* Show the shining line when content is hovered */
+    animation: shine 1.5s infinite alternate;
+}
+
+
+
+@keyframes shine {
+    0% { 
+        top: -50%; 
+        left: -10%;
+    }
+    100% { 
+        top: 50%; 
+        left: 110%; 
+    }
+}
+
+@media (max-width: 767px) {
+    .utility-box {
+        float: none;
+    }
+    .utility-content{
+        height: 600px;
+        width: 300px;
+    }
+}
+.utility-wrapper {
+    display: flex;
+    overflow-x: auto;
+}
+
+.utility-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #007BFF; /* Darker background for DexTools */
+    color: #fff; /* White text */
+    text-decoration: none;
+    margin-top: 20px;
+    position: relative; /* Allows positioning of the coin relative to the button */
+    overflow: visible; /* So the coins can appear outside the boundaries of the button */
+    z-index: 1; 
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+
+    /* Optional: Add a slight hover effect to the button for better user feedback */
+    &:hover {
+        transform: scale(1.05); /* Slightly enlarge the button */
+        box-shadow: 0px 0px 25px rgba(0, 123, 255, 0.6); /* Add a subtle glow when hovered */
+    }
+}
+
+
+.utilities-slider h2 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.utilities-slider h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #fff;
+    
+}
+
+.utility-content h3 {
+    content: "Click me";
+    margin-top: auto;
+    font-size: 2.25em;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow:
+    -0.5px -0.5px 0 #000,
+    0.5px -0.5px 0 #000,
+    -0.5px 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
+    
+}
+
+.utility-content p {
+   
+    font-size: 1.25em;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow:
+    -0.5px -0.5px 0 #000,
+    0.5px -0.5px 0 #000,
+    -0.5px 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
+}
+
+
+
+@media (max-width: 768px) {
+    .utilities-slider {
+        padding: 20px;
+    }
+    .utilities-slider h2{
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 768px) {
+    .utilities-slider {
+        overflow-x: auto;   /* Allows horizontal scrolling */
+    }
+    /* If you still want to set a specific width for larger screens, adjust this as necessary. */
+    .utility-box {
+        flex: 0 0 calc(33.33% - 10px); /* Makes 3 boxes fit in a row, adjust as needed */
+    }
+}
+
+.video-container {
+    position: relative;
+    width: 50px/* specify a width if needed */;
+    height: 100px/* specify a height if needed */;
+}
+
+.video-wrapper {
+    position: relative;
+    display: inline-block;  /* Makes the wrapper fit the video size */
+}
+
+.under {
+    display: block;  /* To remove any unwanted space below the video */
+    width: 100%;
+}
+
+.play-pause-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.play-pause-button .fa {
+    font-size: 2em;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 50%;
+}
+.play-pause-button .fa {
+    font-size: 2em;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 50%;
+    transition: transform 0.3s ease; /* Smooth transition for scaling */
+}
+
+/* Hover effect */
+.play-pause-button .fa:hover {
+    transform: scale(1.1);
+}
+
+@keyframes pulse {
+    0% { 
+        transform: scale(1); 
+    }
+    50% { 
+        transform: scale(1.05); 
+    }
+    100% { 
+        transform: scale(1); 
+    }
+}
+
+.play-pause-button .fa-play {
+    animation: pulse 1.5s infinite;  
+}
+
+
+/* Section about */
+.About {
+    display: flex; 
+    justify-content: flex-start;
+    align-items: flex-start;  /* Align content to the top */
+    position: relative;
+    padding: 150px;
+    padding-top: 30px;
+    background: #19181A;
+    padding-bottom: inherit;
+}
+
+.About .about-content {   
+    width: 90%;  /* Takes full width of its container */
+    padding-right: 60px;
+    margin-bottom: 20px; 
+    text-align: left;
+}
+
+.About .about-image {
+    width: 50%; /* Takes half of the container's width */
+    padding: 0px;
+    display: flex;
+    align-items: center; /* Centering the image vertically */
+    justify-content: center; /* Centering the image horizontally */
+}
+
+@media (max-width: 768px) {
+    .About {
+        padding: 5px;
+        padding-top: 15px;
+        display: flex;
+        flex-direction: column;  /* Makes content stack vertically */
+        align-items: center;     /* Centers the content horizontally */
+    }
+
+    .About .about-image {
+        width: 100%; /* Takes full width on mobile */
+        padding: 35px;
+    }
+    .About .about-content { 
+    padding-right: 0px;
+    }
+}
+
+
+
+/* About - Heading Styles */
+.About h2 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.About h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.About h3 {
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+/* About - Paragraph Styles */
+.About p {
+    font-size: 1em;
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* About - Image Styles */
+.About .about-image .under {
+    max-width: 220px; /* Makes sure the image doesn't overflow its container */
+    height: auto; /* Keeps the aspect ratio */
+}
+
+
+.about-content:hover h1,
+.about-content:hover h2,
+.about-content:hover p {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);  /* Glow effect */
+    transition: text-shadow 0.3s ease-in-out;      /* Smooth transition */
+}
+
+/* Styling for the background video */
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;  /* Adjusted to bring video forward */
+    opacity: 0;  /* Initially the video is not visible */
+    transition: opacity 0.3s ease-in-out;  /* Smooth transition */
+    pointer-events: none;  /* Makes video "click-through" when not hovering */
+}
+
+@media (max-width: 768px) {
+    .bg-video {
+        width: 100%;
+        height: 50%;
+    }
+}
+
+/* Section title */
+
+.title {
+    position: relative;
+    padding: 200px 100px 150px 100px;
+    margin-top: -100px;
+    background: #19181A;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-blend-mode: soft-light;
+    background-position: bottom right;
+    width: 100vw;
+    text-align: center; /* To center the content */
+    color: #fff;
+    padding-bottom: 55px;
+}
+
+@media (max-width: 768px) {
+    .title {
+        padding: 200px 46px 100px 40px;
+    }
+}
+
+.title h1 {
+    margin-bottom: 10px; /* Space between the title and the navigation */
+}
+
+.back-link {
+    text-decoration: none;
+    margin-right: 10px; /* Space between the 'back' link and the title */
+}
+
+/* Optional: Add hover effect for the back link */
+.back-link:hover {
+    opacity: 0.7;
+}
+
+
+/* Section article */
+.article {
+    display: flex; 
+    justify-content: flex-start;
+    align-items: flex-start;  /* Align content to the top */
+    position: relative;
+    padding: 150px;
+    padding-top: 30px;
+    background: #19181A;
+    padding-bottom: inherit;
+}
+
+.article .article-content {   
+    width: 90%;  /* Takes full width of its container */
+    padding-right: 60px;
+    margin-bottom: 20px; 
+    text-align: left;
+}
+
+.article .article-image {
+    width: 50%; /* Takes half of the container's width */
+    padding: 0px;
+    display: flex;
+    align-items: center; /* Centering the image vertically */
+    justify-content: center; /* Centering the image horizontally */
+}
+
+
+
+.article .article-image .under {
+    max-width: 380px; /* Makes sure the image doesn't overflow its container */
+    height: auto; /* Keeps the aspect ratio */
+}
+
+/* article - Heading Styles */
+
+.article h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+.article h2 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.article h3 {
+    margin-bottom: 10px;
+    color: #fff;
+}
+.article li{
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+/* article - Paragraph Styles */
+.article p {
+    font-size: 1em;
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* article - Image Styles */
+.article .article-image .under {
+    max-width: 380px; /* Makes sure the image doesn't overflow its container */
+    height: auto; /* Keeps the aspect ratio */
+}
+.mobile-sized-image {
+    width: auto;
+    height: auto;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .mobile-sized-image {
+        width: 220px;
+        height: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    .article {
+        padding: 1px;
+        padding-top: 15px;
+        display: flex;
+        flex-direction: column;  /* Makes content stack vertically */
+        align-items: center;     /* Centers the content horizontally */
+    }
+
+.article h2{
+    font-size: 1em;
+}
+    .article .article-image {
+        width: 100%; /* Takes full width on mobile */
+        padding: 35px;
+    }
+    .article .article-content { 
+    padding-right: 0px;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .facebook-video-embed {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        padding-top: 25px;
+        height: 0;
+        overflow: hidden;
+    }
+    
+    .facebook-video-embed iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+.tokenomic-section {
+    background-color: #19181A;
+    padding: 150px;
+    padding-top: 10x;
+    color: white;
+    border-radius: 0; /* Remove rounded corners */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    z-index: 10;
+    position: relative; 
+}
+@media only screen and (max-width: 768px) {
+    .tokenomic-section {
+        padding: 15px;
+    }
+
+
+}
+
+.tokenomic-section h2 {
+    text-align: center;
+    font-size: 3.5em;
+    margin-bottom: 30px;
+}
+
+.token-details {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* for smaller screens */
+    margin-bottom: 30px;
+}
+
+
+
+.token-box {
+    flex: 1;
+    min-width: 200px; /* adjust based on your design preference */
+    padding: 20px;
+    background-color: #282528; /* slightly lighter than the main background */
+    border-radius: 15px;
+    text-align: center;
+    margin: 10px;
+    transition: transform 0.3s ease;
+    margin-top: 10px;
+}
+
+.piechart-box{
+    
+    flex: 1;
+    min-width: 500px; /* adjust based on your design preference */
+    padding: 20px;
+    background-color: #282528; /* slightly lighter than the main background */
+    border-radius: 15px;
+    text-align: left;
+    margin: 10px;
+    transition: transform 0.3s ease;
+    margin-top: 10px;
+}
+
+.extra-boxes .token-box {
+    filter: blur(2px); /* Adjust the value for more or less blur */
+}
+
+.token-box:hover {
+    transform: scale(1.05); /* subtle hover effect */
+}
+
+.tax-use {
+    text-align: center;
+}
+
+.tax-use h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.pie-chart-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 250px; 
+    margin: 0 auto; 
+    padding: 5px;
+}
+
+.pie-chart-container2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px; 
+    margin: 0 auto; 
+    padding: 5px;
+}
+@media (max-width: 768px) {
+.pie-chart-container2{
+    display: flex;
+
+}
+.piechart-box{
+    min-width: 380px;
+}
+.img-pie {
+    display: none;
+}
+.pie-chart-container{
+    display: flex;
+}
+}
+
+
+.earn-section {
+    background-color: #282528;  /* slightly lighter than the main background */
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 30px;
+    background: linear-gradient(rgba(40, 37, 40, 0.8), rgba(40, 37, 40, 0.8)), url('/img/alpha-earn.webp') no-repeat center center;
+    background-size: cover;
+}
+
+.earn-button {
+    background-color: #007BFF;  /* Example blue, adjust to your website's shade of blue */
+    color: white;
+    padding-top: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+    outline: none;
+    border: none;
+}
+
+.earn-button:hover {
+    background-color: #0056b3;   /* slightly lighter orange for hover effect */
+}
+
+.box-button {
+    background-color: #007BFF;  /* Using the blue color for consistency */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;  /* Space above the button */
+    display: block;  /* Makes it easier to center */
+    text-align: center;  /* Ensures text in the button is centered */
+    width: 100%;  /* Full width of the parent container */
+    max-width: 150px;  /* Maximum width for the button */
+    margin-left: auto;  /* Auto margins for horizontal centering */
+    margin-right: auto;
+}
+
+.box-button:hover {
+    background-color: #0056b3;  /* Darker shade of blue for hover */
+}
+
+.charity-section {
+    font-family: 'Arial', sans-serif;
+    padding: 150px;
+    background: #19181A; /* Modern gradient background */
+    color: #ecf0f1; /* Light text for readability */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    /* Flexbox Centering */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: space-between; /* Centers child elements vertically */
+    align-items: center;     /* Centers child elements horizontally */
+    background-image: url(/lephant1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 50%;
+}
+
+.charity-section h2 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.charity-section h1 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.charity-section p {
+    font-size: 1.2em;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    text-shadow: 
+        -0.5px -0.5px 0 #000,  
+        0.5px -0.5px 0 #000,
+        -0.5px 0.5px 0 #000,
+        0.5px 0.5px 0 #000;
+}
+
+
+
+.charity-slider {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 0;
+    gap: 30px; /* This will increase space between each slide */
+    overflow-x: auto;  /* makes it horizontally scrollable */
+}
+
+
+.slide {
+    background: rgba(236, 240, 241, 0.1); /* Slight background for separation */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.slide:hover {
+    transform: translateY(-10px); /* subtle lift on hover */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Increased shadow on hover */
+}
+
+.slide h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.charity-cta {
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 5px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.charity-cta:hover {
+
+    background-color: darkgray;
+}
+
+/* For the primary CTA */
+.charity-cta {
+    background-color: #2C3E50;  
+    color: #FFFFFF;
+}
+
+
+.collaboration-cta {
+    background-color: #E74C3C;  
+    color: #FFFFFF;
+}
+
+.charity-image{
+    width: 200px;  
+    height: auto; 
+}
+
+.extra-boxes {
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between; /* Space boxes evenly across the line */
+    align-items: stretch; /* Ensure boxes are of equal height */
+}
+
+.token-box {
+    flex: 1; /* Allows boxes to grow and take up equal space */
+    margin: 0 10px; /* Space between boxes; adjust as required */
+  
+}
+
+@media only screen and (max-width: 768px) {
+.charity-slider{
+   gap: 0px;
+   margin:15px;
+   flex-direction: column;
+}
+.charity-section {
+    background-size: 100%;
+}
+}
+
+/* If you want them to stack on smaller screens: */
+@media only screen and (max-width: 1000px) {
+    .extra-boxes {
+        flex-direction: column;
+    }
+
+    .token-box {
+        margin: 1px 5; /* Adjust for vertical spacing on mobile */
+        margin-top: 10px;
+    }
+}
+
+/* Base Styles for Roadmap Section */
+.roadmap-section {
+    color: white;
+    padding: 35px;
+    text-align: center;
+    padding-bottom: 115px;
+    background-size:cover;    /* Resize the background image to cover the entire container */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    background-position: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 1300px) {
+.roadmap-section{
+    background-size: 90%;
+}
+}
+@media only screen and (max-width: 1500px) {
+    .roadmap-section{
+        background-size: 95%;
+    }
+    }
+
+
+.roadmap-title {
+    font-size: 3.5em;
+    color: #fff;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.roadmap-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.roadmap-content {
+    display: flex;
+    gap: 35px;
+    padding: 35px;
+    align-items: top;
+    
+}
+
+.roadmap-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #E63946;
+    margin-right: 10px; /* Adjusted margin for horizontal space next to the circle */
+    align-self: center;
+}
+.roadmap-header {
+    display: flex;
+    align-items: center; /* To vertically center the circle and title */
+    gap: 10px; /* For spacing between the circle and title */
+}
+
+.roadmap-item {
+    
+    width: 300px; 
+    height: 315px; 
+    margin: 1px;
+    text-align: left; /* Left aligning the text */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligning items to the start for left alignment */
+    padding: 10px;
+    border-radius: 10px; /* Rounded corners */
+    transition: box-shadow 0.3s ease;
+}
+
+.roadmap-item:nth-child(1) h3,
+.roadmap-item:nth-child(1) li {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow to make text pop against the gradient */
+}
+
+.roadmap-item:nth-child(1) h3 {
+    color: #f5a623; /* Bright color for the title "Stealth launch" */
+    font-size: 1.5em; /* Slightly larger font */
+}
+
+/* Add a hover effect to raise the box slightly */
+.roadmap-item:hover {
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+}
+
+.roadmap-item h3, 
+.roadmap-item li {
+    margin: 5px 0;
+}
+
+.roadmap-item:hover .roadmap-circle {
+    background-color: #34eb8f;
+    transform: scale(1.5);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.roadmap-item h3,
+.roadmap-item li {
+    transition: text-shadow 0.3s ease-in-out;
+}
+
+.roadmap-item:hover h3,
+.roadmap-item:hover li {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+
+/* Apply the blinking effect to Phase 1's circle */
+.roadmap-item:nth-child(1) .roadmap-circle {
+    animation: blink 1s infinite;  /* 1s duration, repeating indefinitely */
+}
+
+
+/* Keyframes for the blinking animation */
+@keyframes blink {
+    0% {
+        background-color: #19181A;  /* Start color */
+    }
+    50% {
+        background-color: green;  /* Blink to green at the halfway point */
+    }
+    100% {
+        background-color: #19181A;  /* Return to the start color */
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    .roadmap-image-container {
+        display: none;
+    }
+    .roadmap-section{
+        padding: 1px;
+    }
+    .roadmap-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .roadmap-wrapper{
+    justify-content: left;
+    }
+}
+
+/* Existing styles ... */
+
+@media (max-width: 1560px) {
+
+    .roadmap-content {
+        
+        flex-wrap: wrap;      /* Allow the content to wrap */
+    }
+
+
+}
+
+
+
+
+.mosaic-item {
+    flex: 1;
+    min-width: calc(33.3333% - 5px); /* Three images per row accounting for gaps */
+    transition: transform 0.3s ease;
+}
+
+.mosaic-item:hover {
+    transform: scale(1.05);
+}
+
+
+/* FAQ Section */
+.faq-section {
+    padding: 0;
+    color: black;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-accordion {
+    margin-top: 20px;
+}
+
+.faq-item {
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;  /* Keeps the border-radius for the child elements */
+}
+
+.faq-question {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.faq-answer {
+    display: none;  /* initially hidden */
+    padding: 10px 15px;
+    background-color: white;
+}
+
+.faq-container {
+    background-color: #F8F8F8;  /* Color of the box */
+    border-radius: 20px;        /* Rounded corners */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    padding: 40px;              /* Spacing inside the box */
+    margin: 50px auto;          /* Vertical spacing and auto horizontal centering */
+    max-width: 900px;           /* Maximum width of the box */
+}
+
+/* Section getting-started */
+.getting-started {
+    display: flex;
+    flex-direction: column;  /* Changes direction to vertical */
+    justify-content: center;
+    align-items: left;  /* Centers content */
+    position: relative;
+    padding: 150px;
+    background: #19181A;
+    padding-top: inherit;
+}
+
+.content-wrapper {
+    display: flex;  /* Makes children align horizontally */
+    justify-content: space-between;  /* Spaces children evenly */
+    width: 100%;  /* Takes full width */
+  /* Sets a max width for responsiveness */
+    width: 100%;  /* Takes full width */
+    padding: 0;  /* Ensure no padding */
+}
+
+
+.getting-started .getting-started-content {
+    flex: 1;
+    padding: 0 30px;
+    margin-bottom: 20px;
+    text-align: left;
+    padding: 0;
+    padding-right: 30px;
+    
+    display: flex;         /* Added */
+    flex-direction: column; /* Added */
+    justify-content: space-between; /* Added - This ensures maximum space between the elements, pushing the button to the bottom */
+}
+
+
+
+.getting-started .getting-started-image {
+    width: 50%; /* Takes half of the container's width */
+    padding: 0px;
+    display: flex;
+    align-items: center; /* Centering the image vertically */
+    justify-content: center; /* Centering the image horizontally */
+}
+.getting-started .getting-started-image .under {
+    max-width: 380px; /* Makes sure the image doesn't overflow its container */
+    height: auto; /* Keeps the aspect ratio */
+}
+
+/* Rest of your existing CSS */
+.getting-started h2 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: left;  /* Align text to the left */
+}
+
+
+.getting-started h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.getting-started p {
+    font-size: 1em;
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+.getting-started button {
+    padding: 10px 20px;
+    background-color: #007BFF;  /* Blue color */
+    color: #fff;  /* White text */
+    border: none;  /* Removing any borders */
+    border-radius: 5px;  /* Slight rounded corners */
+    cursor: pointer;  /* Hand cursor on hover */
+    transition: background-color 0.3s;  /* Smooth transition effect */
+}
+
+.getting-started button:hover {
+    background-color: #0056b3;  /* Darker shade of blue on hover */
+}
+
+.getting-started-content {
+    
+    position: relative; 
+    z-index: 1;  /* Setting a context for absolute positioning of the pseudo-element */
+    transition: all 1s ease-in-out; 
+    
+}
+
+.getting-started-content .btn {
+    margin-top: auto;
+    margin-right: auto;  /* Ensures button sticks to the left */
+    padding: 8px 12px;   /* Adjust the padding to fit the text better. Change values as needed. */
+    text-align: left;    /* Aligns the text to the left within the button */
+    width: auto;         /* Let's the button size itself based on its content */
+}
+
+.getting-started-content::before {
+    content: "";
+    display: block;  /* Explicitly declaring block display */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+
+.getting-started-content:hover h1, .getting-started-content:hover p {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* For Choose your wallet section */
+.getting-started-content:nth-child(1):hover::before {
+    background-image: url("/img/wallet.png");
+    opacity: 0.2;
+}
+
+/* For Configure your wallet section */
+.getting-started-content:nth-child(2):hover::before {
+    background-image: url("/img/wallet-config.png");
+    opacity: 0.2;
+}
+
+/* For Get some $ALPHAS section */
+.getting-started-content:nth-child(3):hover::before {
+    background-image: url("/img/Uniswap.webp");
+    opacity: 0.2;
+}
+.heading-glow {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+
+@media (max-width: 768px) {
+    .getting-started {
+        padding: 25px;
+        padding-top: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .getting-started .about-image {
+        width: 100%;
+        padding: 35px;
+    }
+
+    .getting-started .about-content { 
+        padding-right: 0px;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+    }
+}
+
+.social-icons {
+    z-index: 1000;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    position: fixed;
+    right: 20px; /* Increase the distance from the right edge for breathing space */
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 25px 20px; /* More padding for a spacious look */
+    background: linear-gradient(0deg, #19181A 0%, rgba(76, 68, 78, 0.90) 100%);
+    border-radius: 25px; /* Softer rounded look */
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.20);/* Slightly softer shadow */
+}
+
+.social-icons:hover {
+    background: linear-gradient(to top, rgba(77, 77, 77, 0.95), rgba(55, 54, 56, 0.95)); /* Slightly brighter gradient on hover with transparency */
+}
+
+.social-icons a img {
+    margin-bottom: 15px; /* Increased spacing between icons */
+    width: 45px; /* Slightly larger icons */
+    height: 45px;
+    object-fit: cover;
+    transition: transform 0.3s ease, filter 0.3s ease; /* Added filter to the transition for a brightness effect */
+}
+
+.social-icons a:last-child img {
+    margin-bottom: 0;
+}
+
+.social-icons a:hover img {
+    transform: scale(1.2) rotate(10deg); /* Slightly reduced rotation for a subtle effect */
+    filter: brightness(1.2); /* Brighten the icon on hover */
+}
+
+/* Mobile optimization */
+@media only screen and (max-width: 768px) {
+    .social-icons {
+        right: 5px; /* Slight adjustment from the right edge */
+        padding: 10px 10px; /* Reduced padding for mobile */
+    }
+
+    .social-icons a img {
+        margin-bottom: 10px; /* Moderate spacing between icons for mobile */
+        width: 20px; /* Slightly larger icons for mobile, but not too big */
+        height: 20px;
+    }
+}
+
+@keyframes rotateMoon {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.5); /* Combine translate, rotate, and scale */
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) scale(0.5); /* Combine translate, rotate, and scale */
+    }
+}
+
+#moon {
+    width: 100%; /* or whatever size you want */
+    height: auto;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    animation: rotateMoon 120s infinite linear;
+    transform-origin: center center;
+}
+
+@media only screen and (max-width: 768px) {
+    #moon {
+        width: 200%; /* Adjust this value as needed */
+    }
+}
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+
+
+footer {
+    background-color: #19181A; /* Set to desired background color */
+    padding: 150px 0;
+    font-family: Arial, sans-serif; /* or your preferred font */
+    padding:150px;
+    display: inline-block;
+    text-decoration: none;
+    outline: none;
+    border: none;
+}
+
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    font-size: 1em;
+    color: #fff;
+}
+
+.footer-logo img {
+    max-width: 150px;
+}
+
+.footer-links {
+    display: inline-block;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.footer-links ul {
+    
+    list-style-type: none;
+    padding: 0;
+    display: inline-block;
+    text-decoration: none;
+    outline: none;
+    border: none;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 10px;
+    display: inline-block;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    
+}
+
+
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-actions button {
+    background-color: #0099ff;
+    border: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.footer-actions button:hover {
+    background-color: #0077cc;
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: space-between; /* Distribute items evenly */
+    align-items: center; /* Vertically align the items */
+}
+
+.footer-socials img {
+    width: auto;
+    height: 40px; /* Change this value to your preferred size */
+}
+
+.footer-bottom p {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+
+
+
+@media only screen and (max-width: 1000px) {
+
+    .contact{
+        padding: 5px;
+        
+    }
+
+}
+
+
+.earn-button:hover {
+    background-color: #0056b3;   
+}
+
+/* Phone resolution fix */
+@media only screen and (max-width: 1100px) {
+    .as-seen-in{
+        padding: 25px;
+    }
+    .About{
+        padding: 25px;
+    }
+    .getting-started{
+        padding: 25px;
+    }
+    .utilities-slider{
+        padding: 25px;
+    }
+    .tokenomic-section{
+        padding: 25px;
+    }
+    .footer-content{
+        padding: 5px;
+    }
+    footer {
+        padding: 5px;
+    }
+    .charity-section{
+        padding: 25px;
+    }
+}
+body {
+    background-color: greyishblack; /* Replace with your actual color */
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.contact-form-container {
+    background: rgba(255, 255, 255, 0.05); /* Slight white overlay for visibility */
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px; /* Maximum width of the form */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    justify-content: center; 
+}
+
+.contact-form-container h1 {
+    margin: 0;
+    color: #FFFFFF;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-form-container input, 
+.contact-form-container textarea, 
+.contact-form-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.contact-form-container input:focus, 
+.contact-form-container textarea:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Subtle glow effect when field is focused */
+}
+
+.contact-form-container textarea {
+    resize: none; /* Disable textarea resizing */
+    height: 120px;
+}
+
+.contact-form-container button {
+    background-color: #FFFFFF;
+    color: #19181A;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-form-container button:hover {
+    background-color: #FFF5E1;
+}
+
+.contact-section {
+    display: flex; 
+    justify-content: flex-start;
+    align-items: flex-start;  /* Align content to the top */
+    justify-content: space-around;
+    position: relative;
+    padding: 150px;
+    padding-top: 30px;
+    background: #19181A;
+    padding-bottom: inherit;
+}
+
+.contact-section .contact-section-content {   
+    width: 90%;  /* Takes full width of its container */
+    padding-right: 60px;
+    margin-bottom: 20px; 
+    text-align: left;
+}
+
+@media only screen and (max-width: 768px) {
+    .contact-section {
+        padding: 0px;
+    }
+
+}

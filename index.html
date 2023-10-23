@@ -1,0 +1,187 @@
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <meta charset="UTF-8">
+
+    <title>ALPHAS</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script src="scripts.js"></script>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const clickableImages = document.querySelectorAll('[data-clickable]');
+
+            clickableImages.forEach(img => {
+                img.addEventListener('click', function () {
+                    const targetUrl = img.getAttribute('data-href');
+                    if (targetUrl) {
+                        window.location.href = targetUrl;
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            // For Phase 1
+            $('.roadmap-item:nth-child(1)').hover(function () {
+                $('#Roadmap').css('background-image', 'url(/img/Roadmap/Phase1.png)');
+            }, function () {
+                $('#Roadmap').css('background-image', '');
+            });
+
+            // For Phase 2
+            $('.roadmap-item:nth-child(2)').hover(function () {
+                $('#Roadmap').css('background-image', 'url(/img/Roadmap/Phase2.png)');
+            }, function () {
+                $('#Roadmap').css('background-image', '');
+            });
+            // For Phase 3
+            $('.roadmap-item:nth-child(3)').hover(function () {
+                $('#Roadmap').css('background-image', 'url(/img/Roadmap/Phase3.png)');
+            }, function () {
+                $('#Roadmap').css('background-image', '');
+            });
+
+            // For Phase 4
+            $('.roadmap-item:nth-child(4)').hover(function () {
+                $('#Roadmap').css('background-image', 'url(/img/Roadmap/Phase4.png)');
+            }, function () {
+                $('#Roadmap').css('background-image', '');
+            });
+            // Repeat for other phases...
+        });
+    </script>
+    
+    
+
+</head>
+
+<body>
+
+
+
+    <!-- Utility Section -->
+
+    <div class="utilities-slider">
+
+        <h1>The ALPHA WAKANDA FOREVER</h1>
+        <div class="utility-row">
+            <div class="utility-box">
+                <div class="utility-frame">
+                    <div class="utility-content">
+                        <div class="slide-img">
+                            <img data-clickable="" data-href="https://alphaselephant.app/stake" class="slide-logo"
+                                src="/img/Utility/Staking-utility-logo.webp" alt="Utility">
+                            <img data-clickable="" data-href="https://alphaselephant.app/stake" class="front-image"
+                                src="/img/Utility/1.png" alt="Utility">
+                            <img data-clickable="" data-href="https://alphaselephant.app/stake" class="bg-image"
+                                src="/img/Utility/2.png" alt="Utility">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Utility Box 2 -->
+            <div class="utility-box">
+                <div class="utility-frame">
+                    <div class="utility-content">
+                        <div class="slide-img">
+                            <img data-clickable="" data-href="lottery.html" class="slide-logo"
+                                src="/img/Utility/Lottery-utility-logo.webp" alt="Utility">
+                            <img data-clickable="" data-href="lottery.html" class="front-image" src="/img/Utility/3.png"
+                                alt="Utility">
+                            <img data-clickable="" data-href="lottery.html" class="bg-image" src="/img/Utility/4.png"
+                                alt="Utility">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Utility Box 3 -->
+            <div class="utility-box">
+                <div class="utility-frame">
+                    <div class="utility-content">
+                        <div class="slide-img">
+                            <img class="slide-logo" src="/img/Utility/Alphas Sanctuary-logo.webp" alt="Utility">
+                            <img class="front-image" src="/img/Utility/5.png" alt="Utility">
+                            <img class="bg-image" src="/img/Utility/6.png" alt="Utility">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+    <audio id="myAudio" controls>
+        <source src="audio/phonk.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      
+      <script>
+      // Get the audio element by its ID
+      const audio = document.getElementById('myAudio');
+      
+      // Add an event listener to the 'load' event, which occurs when the page is refreshed
+      window.addEventListener('load', function() {
+        // Play the audio
+        audio.play();
+      });
+      </script>
+      
+    <div id="musicModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Welcome to ALPHAS WAKANDA FOREVER</h2>
+            <p>Would you like to enter with background music?</p>
+            <button1 id="withMusic">Yes, with music</button1>
+            <button1 id="withoutMusic">No, without music</button1>
+        </div>
+    </div>
+    <audio id="backgroundMusic" loop="" __idm_id__="6053889">
+        <source src="audio/phonk.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const musicModal = document.getElementById("musicModal");
+            const withMusicButton = document.getElementById("withMusic");
+            const withoutMusicButton = document.getElementById("withoutMusic");
+            const backgroundMusic = document.getElementById("backgroundMusic");
+
+            // Show the modal when the "Yes, with music" button is clicked
+            withMusicButton.addEventListener("click", function() {
+                musicModal.style.display = "block";
+                backgroundMusic.play();
+            });
+
+            // Hide the modal when the "No, without music" button is clicked
+            withoutMusicButton.addEventListener("click", function() {
+                musicModal.style.display = "none";
+                backgroundMusic.pause();
+            });
+        });
+    </script>
+    
+
+
+</body>
+
+
+</html>
